@@ -1,0 +1,41 @@
+.form{
+    padding-top: 0;
+    padding-bottom: 100px;
+}
+.form > p{
+    font-size: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.form > form{
+    display: flex;
+    flex-direction: column;
+}
+.form > form > input{
+    outline: 0;
+    border-radius: 5px;
+    border: 1px solid grey;
+    width: 350px;
+    height: 50px;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.form > form > button{
+    outline: 0;
+    background: black;
+    width: 350px;
+    height: 50px;
+    margin-left: auto;
+    border: 0;
+    color: #FFFFFF;
+    font-size: large;
+    cursor: pointer;
+    display: inline-block;
+}
+.form > form > button:hover, .form > form > button:active, .form > form > button:focus{
+    background-color: gray;
+    transition: all 1s ease 0s;
+}
+
