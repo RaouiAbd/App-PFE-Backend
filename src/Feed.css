@@ -1,9 +1,31 @@
 .feed{
     background-color: #f3f2ef;
-    margin-top: 61px;
+    margin-top: 80px;
+    display: flex;
+    justify-content: space-around;
+}
+.feed_group{
+    flex: 0.2;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 0 1px rgb(0 0 0/15%), 0 0 0 rgb(0 0 0/20%);
+}
+.feed_group > h3{
+    border-bottom: 1px solid #f3f2ef;
+    padding: 10px;
+    text-align: center;
+}
+.feed_group-item{
+    padding: 10px;
+    font-size: 16px;
+}
+.feed_group-item:hover{
+    background-color: whitesmoke;
 }
 .feed_body{
-    padding: 5%;
+    flex: 0.7;
 }
 .feed_inputContainer{
     background-color: white;
@@ -25,6 +47,7 @@
 }
 .feed_loading{
     text-align: center;
+    justify-content: center;
 }
 .custom-file{
     z-index: -1;
@@ -54,4 +77,13 @@
 }
 .inputOption > h4{
     margin-left:5px;
+}
+@media screen and (max-width: 800px) {
+    .feed {
+        flex-direction: column;
+        padding: 0 5%;
+    }
+    .feed_group{
+        margin-bottom: 30px;
+    }
 }

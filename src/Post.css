@@ -29,6 +29,20 @@
     display: flex;
     justify-content: space-evenly;
 }
+.post__inputOption{
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    padding: 10px;
+    cursor: pointer;
+}
+.post__inputOption:hover{
+    background-color: whitesmoke;
+    border-radius: 10px;
+}
+.post__inputOption > h4{
+    margin-left:5px;
+}
 .post__pj{
     display: flex;
 }

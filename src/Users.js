@@ -7,13 +7,13 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
 import {makeStyles} from "@material-ui/core";
 import useTable from "./useTable";
-import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import PageHeader from "./PageHeader";
 import Controls from "./controles/Controles";
 import AddIcon from "@material-ui/icons/Add";
 import SignUp from "./SignUp";
 import requests from "./Requests";
 import Popup from "./Popup";
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 
 
 const useStyles = makeStyles(theme => ({
@@ -34,7 +34,6 @@ const headCells = [
     { id: 'email', label: 'Email' },
     { id: 'mobile', label: 'Telephone' },
     { id: 'function', label: 'Fonction'},
-    { id: 'team', label: 'Team'},
 ]
 function Users({usersUrl}){
     const classes = useStyles();
@@ -64,7 +63,7 @@ function Users({usersUrl}){
             <PageHeader className={classes.pageHeader}
                 title="Utilisateurs"
                 subTitle="Gérer les utilisateurs de la plateforme"
-                icon={<PeopleOutlineIcon fontSize="large" />}
+                icon={<PersonOutlineIcon fontSize="large" />}
             />
             <Paper className={classes.pageContent}>
                 <Popup openPopup={openPopup}
@@ -74,6 +73,7 @@ function Users({usersUrl}){
                     <SignUp setOpenPopup={setOpenPopup}
                             registerUrl={requests.registerUrl}
                             setRecords={setRecords}
+                            allGroupsUrl={requests.allGroupsUrl}
                     />
                 </Popup>
                 <Toolbar>
@@ -95,7 +95,6 @@ function Users({usersUrl}){
                                     <TableCell>{item.email}</TableCell>
                                     <TableCell>{item.mobile}</TableCell>
                                     <TableCell>{item.function}</TableCell>
-                                    <TableCell>{item.team}</TableCell>
                                 </TableRow>)
                             )
                         }

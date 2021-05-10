@@ -6,6 +6,16 @@ const requests = {
     registerUrl : '/register',
     userUrl: '/users/user/',
     downloadFileUrl:'/downloadFile/',
-    usersUrl : '/users'
+    usersUrl : '/users',
+    eventUrl : '/events',
+    allGroupsUrl:'/AllGroups',
+    groupsUrl:'/groups',
+    groupUsersUrl:'/users/group/',
+    groupUserUrl:'/group/user',
+    postsByGroup:'/posts/group/',
+    notificationUrl:'/notifications',
+    commentsByPostIdUrl:'/comment/post/',
+    addCommentUrl: '/comment/',
+    discussion : '/discussion/',
 }
 export default requests;

@@ -12,6 +12,7 @@
 }
 .db_sidebar > p{
     font-size: 30px;
+    text-align: center;
     font-weight: bold;
     margin-bottom: 50px;
 }
@@ -24,13 +25,10 @@
     font-weight: bolder;
     cursor: pointer;
     padding: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
 }
 .sidebar_item:hover{
-    background-color: whitesmoke;
-    border-radius: 10px;
-    cursor: pointer;
-    color: gray;
+    color: white;
 }
 .sidebar_hash {
     margin-right: 10px;

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Button from "@material-ui/core/Button";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
@@ -10,16 +10,46 @@ import AttachFileIcon from '@material-ui/icons/AttachFile';
 import InputLabel from "@material-ui/core/InputLabel";
 import Notification from "./Notification";
 import _ from 'lodash';
+import Controls from "./controles/Controles";
+import {makeStyles} from "@material-ui/core";
 
 
-function CreatePoste({postWithFileUrl, postWithoutFileUrl}){
 
+const useStyles = makeStyles(theme => ({
+    select: {
+
+    },
+
+
+}))
+function CreatePoste({postWithFileUrl, postWithoutFileUrl, allGroupsUrl}){
+
+    const classes = useStyles();
     const user = useSelector(selectUser);
     const [uploadFiles, setUploadFiles] = useState([]);
+    const [groups, setGroups] = useState([]);
+    const [selectedGroup, setSelectedGroup] = useState('');
     const [text, setText] = useState('');
     const [success, setSuccess] = useState(false);
     const [fileName, setFileName] = useState([]);
     const [notify, setNotify] = useState({isOpen:false, message:'', type:''});
+
+    useEffect(() => {
+        async function getGroups() {
+            let res = await axios.get(allGroupsUrl);
+            let data = res.data;
+            console.log(data);
+            for(let i = 0 ; i < data.length; i++){
+                for(let j = 0 ; j < data[i].users.length; j++){
+                    if(data[i].users[j].username == user.username){
+                        setGroups(group => [... group, data[i]]);
+                    }
+                }
+            }
+
+        }
+        getGroups();
+    },[allGroupsUrl]);
 
     const handleChange = (value) => {
         setText(value);
@@ -53,11 +83,11 @@ function CreatePoste({postWithFileUrl, postWithoutFileUrl}){
 
     const sendPost = async (e) => {
         e.preventDefault();
-        const dateOfPost = new Date().toJSON().slice(0,10);
+        const dateOfPost = new Date().toJSON();
         const content = text;
-        const photoName = "";
+        const group=selectedGroup;
         const creator = user;
-        const post = {dateOfPost, photoName, content, creator}
+        const post = {dateOfPost, content, group,creator}
         if(uploadFiles.length !== 0){
             const formData = new FormData();
             _.forEach(uploadFiles, file => {
@@ -109,14 +139,21 @@ function CreatePoste({postWithFileUrl, postWithoutFileUrl}){
     }
 
     return(
-        <div style={{ marginTop:'100px',maxWidth: '800px', margin: '2rem auto', paddingLeft:'2%', paddingRight:'2%' }}>
+        <div style={{ marginTop:'80px',maxWidth: '800px', margin: '2rem auto', padding:'30px 2%',backgroundColor:'white' }}>
             <div style={{ textAlign: 'center' }}>
                 <h2 style={{marginTop:'80px', marginBottom:'20px', fontWeight:'lighter'}}>
-                    Ajouter une publication
+                    Create New Post
                 </h2>
             </div>
             <form>
-                <div>
+                <Controls.Select
+                    name="group"
+                    label="Groupe"
+                    value={selectedGroup}
+                    onChange={e=>setSelectedGroup(e.target.value)}
+                    options={groups}
+                />
+                <div style={{marginTop:'10px'}}>
                     <ReactQuill value={text}
                                 theme="snow"
                                 onChange={handleChange}
@@ -138,7 +175,7 @@ function CreatePoste({postWithFileUrl, postWithoutFileUrl}){
                         endIcon={<Icon>send</Icon>}
                         onClick={sendPost}
                     >
-                        Publier
+                        Send
                     </Button>
                     <InputLabel style={{marginLeft:'20px'}}>
                         <input style={{display:'none'}}

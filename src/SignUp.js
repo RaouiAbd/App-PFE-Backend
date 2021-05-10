@@ -15,17 +15,15 @@ const initialFValues = {
     password:'',
     function: '',
     mobile: '',
-    team:'IT',
+    isAdmin:false,
+    isResp:false,
 };
-const teams = [
-    { id: 'IT', title: 'IT' },
-    { id: 'RISQUE', title: 'Risque' },
-];
 
 export default function SignUp({registerUrl,setOpenPopup,setRecords}) {
 
     const dispatch = useDispatch();
     const [users,setUsers] = useState([]);
+    const [notify, setNotify] = useState({isOpen:false, message:'', type:''});
 
     useEffect(() => {
         async function getUsers() {
@@ -36,7 +34,8 @@ export default function SignUp({registerUrl,setOpenPopup,setRecords}) {
         }
         getUsers();
     },[requests.usersUrl,users]);
-    const [notify, setNotify] = useState({isOpen:false, message:'', type:''});
+
+
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('username' in fieldValues)
@@ -47,8 +46,6 @@ export default function SignUp({registerUrl,setOpenPopup,setRecords}) {
             temp.email = (/$^|.+@.+..+/).test(fieldValues.email) ? "" : "cette addresse email n'est pas valide."
         if ('mobile' in fieldValues)
             temp.mobile = fieldValues.mobile.length > 7 ? "" : "Minimum est 7 nombres."
-        if ('team' in fieldValues)
-            temp.team = fieldValues.team ? "" : "Ce champ est obligatoire."
         setErrors({
             ...temp
         })
@@ -68,8 +65,10 @@ export default function SignUp({registerUrl,setOpenPopup,setRecords}) {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (validate()) {
+            console.log(values);
             axios.post(registerUrl, values)
                 .then(response => {
+                    console.log(response);
                     dispatch(login({
                         id : response.data.id,
                         username : response.data.username,
@@ -77,7 +76,6 @@ export default function SignUp({registerUrl,setOpenPopup,setRecords}) {
                         password : response.data.password,
                         function : response.data.function,
                         mobile : response.data.mobile,
-                        team : response.data.team,
                         roles : response.data.roles,
                     }));
                     setOpenPopup(false);
@@ -141,15 +139,20 @@ export default function SignUp({registerUrl,setOpenPopup,setRecords}) {
                         onChange={handleInputChange}
                         error={errors.password}
                     />
-                    <Controls.Select
-                        name="team"
-                        label="Equipe"
-                        value={values.team}
-                        onChange={handleInputChange}
-                        options={teams}
-                        error={errors.team}
-                    />
-
+                    <div style={{display:'flex'}}>
+                        <Controls.Checkbox
+                            label="Admin"
+                            name="isAdmin"
+                            value={values.isAdmin}
+                            onChange={handleInputChange}
+                        />
+                        <Controls.Checkbox
+                            label="Responsable"
+                            name="isResp"
+                            value={values.isResp}
+                            onChange={handleInputChange}
+                        />
+                    </div>
                     <div>
                         <Controls.Button
                             type="submit"

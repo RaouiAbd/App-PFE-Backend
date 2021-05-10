@@ -31,6 +31,7 @@ const Login = ({loginUrl, userUrl}) => {
     }
     const getUser = async (username) => {
             const result = await axios.get(userUrl + username);
+            console.log(result);
             dispatch(login({
                 id : result.data.id,
                 username : result.data.username,
