@@ -1,19 +1,20 @@
 import './App.css';
 import React, {useEffect, useState} from "react";
-import Feed from "./Feed";
-import requests from "./Requests";
-import Login from "./Login";
-import Footer from "./Footer";
-import Nav from "./Nav";
+import Feed from "./feed/Feed";
+import requests from "./shared/Requests";
+import Login from "./user/Login";
+import Footer from "./shared/Footer";
+import Nav from "./shared/Nav";
 import {useSelector} from "react-redux";
-import {selectUser} from "./userSlice";
-import Dashboard from "./Dashboard";
-import CreatePoste from "./CreatePoste";
+import {selectUser} from "./context/userSlice";
+import Dashboard from "./dashboard/Dashboard";
+import CreatePoste from "./post/CreatePoste";
 import {BrowserRouter} from "react-router-dom";
 import Route from "react-router-dom/Route";
 import Switch from "react-router-dom/Route";
-import Loading from "./Loading";
-import Chat from "./Chat";
+import Loading from "./shared/Loading";
+import Chat from "./chat/Chat";
+import {Workspace} from "./workspace/Workspace";
 
 
 function App() {
@@ -42,13 +43,20 @@ function App() {
                                       <Footer/>
                                   </div>
                               </Route>
-                              <Route path="/chat">
+                              <Route path="/w">
                                   <div className="app">
                                       <Nav/>
                                       <div className="app_wrapper">
-                                          <Chat/>
+                                          <Workspace/>
                                       </div>
                                       <Footer/>
+                                  </div>
+                              </Route>
+                              <Route path="/chat">
+                                  <div className="app">
+                                      <div className="app_wrapper">
+                                          <Chat/>
+                                      </div>
                                   </div>
                               </Route>
                               <Route path="/new-post">
@@ -63,11 +71,11 @@ function App() {
                                       <Footer/>
                                   </div>
                               </Route>
-                              <Route path="/notifications">
+                              <Route path="/events">
                                   <div className="app">
                                       <div className="app_wrapper">
                                           <Nav/>
-                                          {/*<ServerNotifications notificationUrl={requests.notificationUrl}/>*/}
+
                                       </div>
                                       <Footer/>
                                   </div>

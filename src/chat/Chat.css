@@ -1,0 +1,136 @@
+.chat{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+}
+.chatSidebar{
+    flex: 0.2;
+    background-color: white;
+    overflow-y: scroll;
+}
+.chatSidebar::-webkit-scrollbar {
+    display: none;
+}
+.chatSidebar{
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.chatSidebar > h3{
+    padding: 20px 0;
+    text-align: center;
+    color: gray;
+}
+.chatSidebar_info{
+    display: flex;
+    padding: 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #f6f6f6;
+}
+.chatSidebar_info > div{
+    margin-left: 8px;
+    align-self: center;
+}
+.chatSidebar_info > div> h4{
+    font-size: 20px;
+    font-weight: 400;
+    color: gray;
+}
+.chatSidebar_info > div > p{
+    font-size: 12px;
+    color: gray;
+}
+.chatSidebar_info:hover{
+    background-color: #ebebeb;
+}
+.chatBody_header{
+    background-color: lightgrey;
+    display: flex;
+    padding: 10px;
+}
+.chatBody_header > h4{
+    font-size: 20px;
+    font-weight: 300;
+    color: gray;
+    margin-left: 10px;
+    align-self: center;
+}
+.chatBody{
+    flex: 0.8;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+}
+.chatBody_body{
+    padding-top: 20px;
+    flex: 1;
+}
+.chatBody_message{
+    position: relative;
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    width: fit-content;
+    max-width: 300px;
+    overflow-wrap: break-word;
+    margin: 0 10px 30px;
+}
+.chatBody_receiver{
+    margin-left: auto;
+    background-color: white;
+}
+
+.message_info{
+    font-size: 15px;
+    position: absolute;
+    top: -17px;
+}
+.message_text{
+    margin: 10px 0;
+    color: gray;
+}
+.message_pj{
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+}
+.message_file{
+    width: 200px;
+    height: 40px;
+    padding: 5%;
+    border-radius: 50px;
+    cursor: pointer;
+    color: gray;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.message_timestamp{
+    font-size: x-small;
+    margin-right: auto;
+}
+.chatBody_footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 62px;
+    border-top: 1px solid lightgrey;
+    background-color: lightgrey;
+}
+.chatBody_footer > form{
+    flex: 1;
+    display: flex;
+}
+.chatBody_footer > form > input{
+    flex: 1;
+    border-radius: 30px;
+    padding: 10px;
+    outline-width: 0;
+    border: none;
+    margin-left: 10px;
+}
+.chatBody_footer > form > button{
+
+}
+.chatBody_footer > .MuiSvgIcon-root{
+    color: gray;
+}

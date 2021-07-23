@@ -1,0 +1,25 @@
+const requests = {
+    postWithFileUrl : '/postWithFile',
+    postWithoutFileUrl : '/postWithoutFile',
+    postUrl : '/post',
+    loginUrl : '/login',
+    registerUrl : '/register',
+    userUrl: '/users/user/',
+    downloadFileUrl:'/downloadFile/',
+    usersUrl : '/users',
+    eventUrl : '/events',
+    allGroupsUrl:'/AllGroups',
+    groupsUrl:'/groups',
+    groupUrl:'/group/',
+    groupUsersUrl:'/users/group/',
+    groupUserUrl:'/group/user',
+    postsByGroup:'/posts/group/',
+    notificationUrl:'/notifications',
+    commentsByPostIdUrl:'/comment/post/',
+    addCommentUrl: '/comment/',
+    discussion : '/discussion/',
+    projectsUrl : '/projects',
+    tasksByProjectUrl : '/tasks/project/',
+    commentsByTaskIdUrl : '/comments/task/'
+}
+export default requests;

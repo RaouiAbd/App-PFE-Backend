@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Drawer, makeStyles } from "@material-ui/core";
 import EventsContainer from "../events/Event-container";
-import requests from "../Requests";
+import requests from "../shared/Requests";
 
 const useStyles = makeStyles(theme => ({
     drawer: {

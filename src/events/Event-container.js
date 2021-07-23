@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItems from "../listItems/ListItems";
-import axios from "../axios";
+import axios from "../shared/axios";
 
 
 
@@ -14,23 +14,6 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const MsgList = [
-    {
-        id: 1,
-        title: "Play football",
-        subTitle: "July 20, 2020, 1:03:13 pm"
-    },
-    {
-        id: 2,
-        title: "Learn new trends",
-        subTitle: "July 16, 2020, 12:57:11 am"
-    },
-    {
-        id: 3,
-        title: "Create tools for people",
-        subTitle: "July 20, 2020, 1:03:13 pm"
-    }
-];
 
 const EventsContainer = ({eventUrl}) => {
     const classes = useStyles();
@@ -48,7 +31,7 @@ const EventsContainer = ({eventUrl}) => {
     return (
         <>
             <h2 style={{margin:'20px 0', textAlign:'center'}}>
-                Evénements
+                Events
             </h2>
             <List className={classes.root}>
                 <ListItems type="ListItemText" data={events} />

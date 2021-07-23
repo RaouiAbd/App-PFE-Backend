@@ -1,0 +1,21 @@
+.workspace{
+    display: flex;
+    padding : 50px 5% 0;
+    justify-content: space-between;
+}
+.workspace_tasks{
+    flex: 0.6;
+}
+.workspace_projects{
+    flex: 0.2;
+    align-self: center;
+}
+@media screen and (max-width: 800px) {
+    .workspace {
+        flex-direction: column;
+    }
+    .workspace_projects{
+        padding: 50px 0 0;
+        width: 100%;
+    }
+}

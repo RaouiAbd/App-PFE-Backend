@@ -1,0 +1,41 @@
+.db{
+    display: flex;
+}
+.db_sidebar{
+    position: sticky;
+    top: 0;
+    flex: 0.2;
+    background-color: black;
+    color: white;
+    padding: 50px;
+    height: 100vh;
+}
+.db_sidebar > p{
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+.sidebar_item{
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: white;
+    font-weight: 200;
+    cursor: pointer;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+.sidebar_item:hover{
+    font-size: 20px;
+    transition: 1s ease;
+}
+.sidebar_hash {
+    margin-right: 10px;
+}
+.db_main{
+    flex: 0.8;
+    margin-left: auto;
+    margin-right: auto;
+}

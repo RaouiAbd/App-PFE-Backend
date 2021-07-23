@@ -1,0 +1,52 @@
+footer{
+    background-color: #262626;
+    color:#fff;
+    width: 100%;
+}
+.main-content{
+    padding: 1.25rem 1.875rem;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.box{
+    padding: 1.25rem;
+    min-width: 12.5rem;
+}
+.box > h2{
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.content{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.content > p{
+    margin-top: 10px;
+    font-weight: 100;
+    color: lightgrey;
+}
+.content > label{
+    margin-top: 8px;
+    font-weight: 100;
+    color: lightgrey;
+}
+.legal > label{
+    color: lightgrey;
+    display: block;
+    font-size: 15px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+@media only screen and (min-width: 29.8125rem /*477px*/) {
+    .box {
+        justify-content: space-around;
+    }
+}
+@media only screen and (min-width: 77.5rem /*1240px*/ ) {
+    .box {
+        justify-content: space-evenly;
+    }
+}
