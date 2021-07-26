@@ -6,6 +6,7 @@ import Popup from "../shared/Popup";
 import AddIcon from "@material-ui/icons/Add";
 import Notification from "../shared/Notification";
 import './Tasks.css';
+import {CommentTask} from "./CommentTask";
 
 export const Tasks = ({tasksByProjectUrl, idProject}) => {
     
@@ -13,6 +14,7 @@ export const Tasks = ({tasksByProjectUrl, idProject}) => {
     const [openPopup, setOpenPopup] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [description, setDescription] = useState("");
+    const [currentId, setCurrentId] = useState(null)
     const [isOpen, setIsOpen] = useState(true);
     
     useEffect(() => {
@@ -40,7 +42,8 @@ export const Tasks = ({tasksByProjectUrl, idProject}) => {
         await axios.put(tasksByProjectUrl+idProject+'/'+id, {isOpen : !isOpen});
     }
 
-    const viewTask = (d) => {
+    const viewTask = (id, d) => {
+        setCurrentId(id);
         setDescription(d);
         setOpenPopup(!openPopup);
     }
@@ -55,7 +58,7 @@ export const Tasks = ({tasksByProjectUrl, idProject}) => {
                     tasks.map(t => (
                         <div key={t.id} className="tasksItem"
                         >
-                            <p onClick={()=>viewTask(t.description)}>{t.description}</p>
+                            <p onClick={()=>viewTask(t.id,t.description)}>{t.description}</p>
                             <button
                                 className={t.isOpen ? "open" : "closed"}
                                 onClick={()=>updateTaskState(t.id)}
@@ -66,9 +69,10 @@ export const Tasks = ({tasksByProjectUrl, idProject}) => {
                                    setOpenPopup={setOpenPopup}
                                    title={description}
                             >
-                                <Comment getCommentsUrl={requests.commentsByTaskIdUrl}
-                                         addCommentUrl={requests.addCommentUrl}
-                                         id={t.id}
+                                <CommentTask getComments={requests.commentsByTaskIdUrl}
+                                             addComment={requests.addCommentToTask}
+                                             addCommentWithFile={requests.addCommentWithFileToTask}
+                                             idTask={currentId}
                                 />
                             </Popup>
                         </div>

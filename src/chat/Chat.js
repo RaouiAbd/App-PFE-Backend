@@ -10,6 +10,7 @@ import AttachFileIcon from "@material-ui/icons/AttachFile";
 import SendIcon from '@material-ui/icons/Send';
 import InputLabel from "@material-ui/core/InputLabel";
 import _ from "lodash";
+import GetAppIcon from "@material-ui/icons/GetApp";
 
 
 const Chat = () => {
@@ -160,6 +161,7 @@ const Chat = () => {
                                                                 <div onClick={() => downloadFile(file)}
                                                                      className="message_file"
                                                                 >
+                                                                    <GetAppIcon/>
                                                                     {file.fileName}
                                                                 </div>
                                                             </div>

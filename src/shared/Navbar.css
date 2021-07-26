@@ -46,6 +46,14 @@ nav ul li{
 .aClass:hover{
     background-color: black;
 }
+.myGroups{
+    position: absolute;
+    top: 38px;
+    width: 100px;
+    box-shadow: -3px 0 2px lightgrey, 1px 2px 1px lightgrey;
+
+
+}
 button{
     display: flex;
     align-items: center;
@@ -90,6 +98,11 @@ button{
     }
     #hl > li{
         margin-bottom: 30px;
+    }
+    .myGroups{
+        width: 100%;
+        position: absolute;
+        top: 30px;
     }
 
 }

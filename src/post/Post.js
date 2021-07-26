@@ -6,6 +6,7 @@ import ChatIcon from '@material-ui/icons/Chat';
 import requests from "../shared/Requests";
 import Popup from "../shared/Popup";
 import Comment from "./Comment";
+import GetAppIcon from "@material-ui/icons/GetApp";
 
 
 function Post({idPost,name,date,message,files, downloadFileUrl}){
@@ -51,7 +52,8 @@ function Post({idPost,name,date,message,files, downloadFileUrl}){
                             files.map(file => (
                                 <div key={file.id}>
                                     <div onClick={() => downloadFile(file)} className="post__file">
-                                        {file.fileName}
+                                        <GetAppIcon/>
+                                        <p>{file.fileName}</p>
                                     </div>
                                 </div>
                             ))

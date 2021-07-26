@@ -8,22 +8,22 @@ import _ from "lodash";
 import Avatar from "@material-ui/core/Avatar";
 import InputLabel from "@material-ui/core/InputLabel";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
-import SendIcon from "@material-ui/icons/Send";
+import GetAppIcon from '@material-ui/icons/GetApp';
 
-export const CommentTask = () => {
+export const CommentTask = ({getComments, idTask, addComment, addCommentWithFile}) => {
     const user = useSelector(selectUser);
     const [message, setMessage] = useState("");
     const [comments, setComments] = useState([]);
     const [uploadFiles, setUploadFiles] = useState([]);
     const [fileName, setFileName] = useState([]);
     useEffect(() => {
-        async function getComments() {
-            let result = await axios.get();
+        const getMessagesOfTask = async () => {
+            let result = await axios.get(getComments + idTask);
             let data = result.data;
             setComments(data);
         }
-        getComments();
-    },[, comments]);
+        getMessagesOfTask();
+    },[getComments+idTask, comments]);
 
     const onChange = (e) => {
         setUploadFiles(e.target.files);
@@ -67,7 +67,7 @@ export const CommentTask = () => {
                         type: "application/json"
                     }));
             try {
-                let r = await axios.post("/discussionWithFile", formData);
+                let r = await axios.post(addCommentWithFile+idTask, formData);
                 setFileName([]);
                 setUploadFiles([]);
             } catch (e) {
@@ -76,7 +76,7 @@ export const CommentTask = () => {
 
         } else {
             try {
-                const r = axios.post("/discussionWithoutFile", discussion);
+                const r = axios.post(addComment+idTask, commentTask);
             } catch (e) {
                 console.log(e);
             }
@@ -92,47 +92,14 @@ export const CommentTask = () => {
 
 
     return (
-        <div className="chat">
-            <div className="chatSidebar">
-                <h3></h3>
-                {
-                    users.length !== 0 ?
-                        users.map(u => (
-                            <div className="chatSidebar_info"
-                                 onClick={() => {
-                                     setUserReceiver(u);
-                                 }}
-                            >
-                                <Avatar>
-                                    {u.username[0].toUpperCase()}
-                                </Avatar>
-                                <div>
-                                    <h4 key={u.id}>
-                                        {u.username}
-                                    </h4>
-                                    <p>{u.function}</p>
-                                </div>
-                            </div>
-                        )) : <div> Pas d'utilisateurs</div>
-                }
-            </div>
-            <div className="chatBody">
-                {
-                    userReceiver !== null ? (
-                        <div className="chatBody_header">
-                            <h4 key={userReceiver.id}>
-                                {userReceiver.username}
-                            </h4>
-                        </div>
-                    ) : ""
-                }
-                <div className="chatBody_body">
+        <div style={{width:"500px"}}>
+                <div style={{paddingTop:"20px", flex: "1"}}>
                     {
                         sorted.length !== 0 ?
                             sorted.map(m => (
-                                <div className={m.sender.username === user.username ?
+                                <div className={m.user.username === user.username ?
                                     "chatBody_message chatBody_receiver" : "chatBody_message"}>
-                                    <h2 className="message_info">{m.sender.username}</h2>
+                                    <h2 className="message_info">{m.user.username}</h2>
                                     <p className="message_text">{m.message}</p>
                                     {
                                         m.files.length ? (
@@ -144,7 +111,8 @@ export const CommentTask = () => {
                                                                 <div onClick={() => downloadFile(file)}
                                                                      className="message_file"
                                                                 >
-                                                                    {file.fileName}
+                                                                    <GetAppIcon/>
+                                                                    <p>{file.fileName}</p>
                                                                 </div>
                                                             </div>
                                                         ))
@@ -157,7 +125,7 @@ export const CommentTask = () => {
                                         le : {m.dateOfMessage.slice(0, 10)} à {m.dateOfMessage.slice(11, 16)}
                                     </p>
                                 </div>
-                            )): null
+                            )): <div style={{marginBottom:"50px"}}>No message</div>
                     }
 
                 </div>
@@ -177,14 +145,20 @@ export const CommentTask = () => {
                                 <AttachFileIcon/>
                             </div>
                         </InputLabel>
-                        <SendIcon onClick={sendMessage}
-                                  style={{color:'gray',
+                        <button onClick={sendMessage}
+                                  style={{color:'white',
+                                      fontSize:'16px',
                                       alignSelf:'center',
-                                      marginRight:'50px'}}
-                        />
+                                      marginRight:'50px',
+                                      backgroundColor:'black',
+                                      border:'none',
+                                      padding:'10px'
+                                  }}
+                        >
+                            Send
+                        </button>
                     </form>
                 </div>
             </div>
-        </div>
     );
 }

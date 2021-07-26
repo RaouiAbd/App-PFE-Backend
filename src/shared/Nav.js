@@ -13,11 +13,15 @@ import HomeIcon from '@material-ui/icons/Home';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import EventIcon from '@material-ui/icons/Event';
 import HeaderOption from "../shared/HeaderOption";
+import {MyGroups} from "../group/MyGroups";
+import GroupIcon from '@material-ui/icons/Group';
+import WorkIcon from '@material-ui/icons/Work';
 
 function Nav() {
 
     const [className, setClassName] = useState("");
     const [links, setLinks] = useState(false);
+    const [showGroups, setShowGroups] = useState(false)
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
     const [events, setEvents] = useState([]);
@@ -74,15 +78,24 @@ function Nav() {
                     <li><Link to="/new-Post" onClick={showLinks}>
                         <HeaderOption Icon={TelegramIcon} title="New Post"/>
                     </Link></li>
-                    <li><Link to="/chat" onClick={showLinks}>
-                        <HeaderOption Icon={ChatIcon} title="Chat"/>
+                    <li><Link to="/workspace" onClick={showLinks}>
+                        <HeaderOption Icon={WorkIcon} title="Projects"/>
                     </Link></li>
+                    <li style={{position:'relative'}} onClick={e => {
+                            setShowGroups(!showGroups);
+                        }}
+                    >
+                        {showGroups ?
+                            <><HeaderOption Icon={EventIcon} title="MyGroups"/>
+                            <div className="myGroups">
+                                <MyGroups allGroupsUrl={requests.allGroupsUrl}/>
+                            </div></>
+                            : <HeaderOption Icon={GroupIcon} title="MyGroups"/>
+                        }
+                    </li>
                     <li onClick={showPanel}>
                         <HeaderOption Icon={EventIcon} title="Events"/>
                     </li>
-                    {/*<li onClick={showPanel}>
-                        <HeaderOption Icon={NotificationsIcon} title="Notifications"/>
-                    </li>*/}
                     <li><Link to="/" className="aClass" onClick={logoutUser}>
                         Logout
                     </Link></li>

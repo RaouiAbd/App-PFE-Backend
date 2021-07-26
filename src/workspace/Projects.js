@@ -3,28 +3,29 @@ import axios from "../shared/axios";
 import AddIcon from "@material-ui/icons/Add";
 import './Projects.css';
 import Notification from "../shared/Notification";
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import {useSelector} from "react-redux";
+import {selectGroup} from "../context/groupSlice";
 
-export const Projects = ({projectsUrl, getIdProject}) => {
+export const Projects = ({projectsUrl, projectsByGroupUrl,getIdProject}) => {
 
     const [projects, setProjects] = useState([]);
     const [projectName, setProjectName] = useState("");
     const [showForm, setShowForm] = useState(false);
-    const [color, setColor] = useState("blue");
     const [notify, setNotify] = useState({isOpen:false, message:'', type:''});
+    const selectedGroup = useSelector(selectGroup);
 
     useEffect(() => {
         async function getProjects(){
-            const result = await axios.get(projectsUrl);
+            const result = await axios.get(projectsByGroupUrl+selectedGroup.id);
             setProjects(result.data);
         }
         getProjects();
-    }, [projects, projectsUrl]);
+    }, [projectsByGroupUrl+selectedGroup.id, projects]);
 
     const addProject = async (e) => {
         e.preventDefault();
         try{
-            const project = {name:projectName, tasks:null};
+            const project = {name:projectName, group:selectedGroup, tasks:null};
             const result = await axios.post(projectsUrl, project);
             setProjectName("");
             setShowForm(!showForm);
@@ -55,7 +56,7 @@ export const Projects = ({projectsUrl, getIdProject}) => {
                             getIdProject(p.id);
                         }}
                         >
-                            - {p.name}
+                            {p.name}
                         </div>
                     )) :
                     <div></div>

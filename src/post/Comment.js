@@ -49,7 +49,7 @@ function Comment({id, getCommentsUrl, addCommentUrl}){
                                         <span className="comment_timestamp">3:52</span>
                                     </p>
                                 </div>
-                        )) : <div>No comments</div>
+                        )) : <div>No comment</div>
                 }
             </div>
             <div className="comment_input">

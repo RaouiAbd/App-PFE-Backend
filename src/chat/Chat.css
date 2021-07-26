@@ -68,11 +68,12 @@
     position: relative;
     background-color: white;
     padding: 5px 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     width: fit-content;
     max-width: 300px;
     overflow-wrap: break-word;
     margin: 0 10px 30px;
+    box-shadow: -2px -1px lightgrey;
 }
 .chatBody_receiver{
     margin-left: auto;
@@ -81,6 +82,7 @@
 
 .message_info{
     font-size: 15px;
+    font-weight: 500;
     position: absolute;
     top: -17px;
 }
@@ -93,16 +95,25 @@
     display: flex;
     flex-direction: column;
 }
-.message_file{
+.message_file {
     width: 200px;
-    height: 40px;
-    padding: 5%;
-    border-radius: 50px;
     cursor: pointer;
     color: gray;
+    display: flex;
+}
+.message_file > .MuiSvgIcon-root{
+    font-size: 14px;
+    align-self: center;
+}
+.message_file > p{
+    font-size: 12px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    align-self: center;
+}
+.message_file > p:hover{
+    text-decoration: underline grey;
 }
 .message_timestamp{
     font-size: x-small;
@@ -113,8 +124,8 @@
     justify-content: space-between;
     align-items: center;
     height: 62px;
-    border-top: 1px solid lightgrey;
-    background-color: lightgrey;
+    position: sticky;
+    bottom: 0;
 }
 .chatBody_footer > form{
     flex: 1;
@@ -125,8 +136,7 @@
     border-radius: 30px;
     padding: 10px;
     outline-width: 0;
-    border: none;
-    margin-left: 10px;
+    border: 1px solid grey;
 }
 .chatBody_footer > form > button{
 

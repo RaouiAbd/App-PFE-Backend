@@ -15,17 +15,24 @@ import Switch from "react-router-dom/Route";
 import Loading from "./shared/Loading";
 import Chat from "./chat/Chat";
 import {Workspace} from "./workspace/Workspace";
+import {MyGroups} from "./group/MyGroups";
+import {selectGroup} from "./context/groupSlice";
+import {ComponentWhenNothingSelected} from "./workspace/ComponentWhenNothingSelected";
 
 
 function App() {
+
     const user = useSelector(selectUser);
+    const selectedGroup = useSelector(selectGroup);
     const [loading, setLoading] = useState(false);
+
     useEffect(()=>{
         setLoading(true);
         setTimeout(()=>{
             setLoading(false)
-        }, 8000);
-    }, [])
+        }, 3000);
+    }, []);
+
       if(user){
           return (
               <BrowserRouter>
@@ -35,28 +42,26 @@ function App() {
                                   <div className="app">
                                       <Nav/>
                                       <div className="app_wrapper">
-                                          <Feed postUrl={requests.postUrl}
-                                                allGroupsUrl={requests.allGroupsUrl}
-                                                postsByGroup={requests.postsByGroup}
-                                          />
+                                          {
+                                              selectedGroup ?
+                                                  <Feed postsByGroup={requests.postsByGroup}/> :
+                                                  <ComponentWhenNothingSelected name={"Group"}/>
+                                          }
                                       </div>
                                       <Footer/>
                                   </div>
                               </Route>
-                              <Route path="/w">
+                              <Route path="/workspace">
                                   <div className="app">
                                       <Nav/>
                                       <div className="app_wrapper">
-                                          <Workspace/>
+                                          {
+                                              selectedGroup ?
+                                                  <Workspace/> :
+                                                  <ComponentWhenNothingSelected name={"Workspace"}/>
+                                          }
                                       </div>
                                       <Footer/>
-                                  </div>
-                              </Route>
-                              <Route path="/chat">
-                                  <div className="app">
-                                      <div className="app_wrapper">
-                                          <Chat/>
-                                      </div>
                                   </div>
                               </Route>
                               <Route path="/new-post">

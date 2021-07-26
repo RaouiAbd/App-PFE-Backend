@@ -1,14 +1,16 @@
 .workspace{
     display: flex;
-    padding : 50px 5% 0;
+    padding : 0 5%;
+    margin-top: 80px;
     justify-content: space-between;
 }
 .workspace_tasks{
     flex: 0.6;
+    justify-self: center;
 }
 .workspace_projects{
     flex: 0.2;
-    align-self: center;
+    justify-self: center;
 }
 @media screen and (max-width: 800px) {
     .workspace {

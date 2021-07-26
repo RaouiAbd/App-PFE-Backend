@@ -6,48 +6,24 @@ import Parser from 'html-react-parser';
 import requests from "../shared/Requests";
 import {useSelector} from "react-redux";
 import {selectUser} from "../context/userSlice";
+import {selectGroup} from "../context/groupSlice";
 
 
-const Feed = ({allGroupsUrl, postsByGroup}) => {
+const Feed = ({postsByGroup}) => {
 
     const [posts, setPosts] = useState([]);
-    const [groups, setGroups] = useState([]);
-    const [group, setGroup] = useState(null);
-    const user = useSelector(selectUser);
+    const selectedGroup = useSelector(selectGroup);
+
 
     useEffect(() => {
-        async function getGroups() {
-            let res = await axios.get(allGroupsUrl);
-            let data = res.data;
-            console.log(data);
-            for(let i = 0 ; i < data.length; i++){
-                for(let j = 0 ; j < data[i].users.length; j++){
-                    if(data[i].users[j].username == user.username){
-                        setGroups(group => [... group, data[i]]);
-                    }
-                }
-            }
-
-        }
-        getGroups();
-    },[allGroupsUrl]);
-
-    useEffect(() => {
-        async function getPosts() {
-            let res = await axios.get(postsByGroup + "1");
+        const getPostsByGroup = async () => {
+            let res = await axios.get(postsByGroup + selectedGroup.id);
             let data = res.data;
             setPosts(data);
         }
-        getPosts();
-    },[postsByGroup + "1"]);
+        getPostsByGroup();
+    },[postsByGroup + selectedGroup.id, posts]);
 
-
-    const getPostsByGroup = async (g) => {
-        setGroup(g);
-        let res = await axios.get(postsByGroup + g.id);
-        let data = res.data;
-        setPosts(data);
-    }
     const sorted = posts.sort((a, b) => {
         return -1 *(a.id - b.id);
     })
@@ -56,25 +32,9 @@ const Feed = ({allGroupsUrl, postsByGroup}) => {
 
     return (
         <div className="feed">
-            <div className="feed_group">
-                <h3>My Groupes</h3>
-                {
-                    groups.length !== 0 ?
-                        groups.map((g, i) => (
-                            <p key={i}
-                               onClick={()=>getPostsByGroup(g)}
-                               className="feed_group-item"
-                            >
-                                ⚫ {g.username}
-                            </p>
-                        ))
-                        : <p>Any groupe</p>
-                }
-            </div>
-            <div className="feed_body">
-                <h3>{group ? group.username : "General"}</h3>
-                {
-                    sorted.length !== 0 ?
+            <h3>{selectedGroup.username}</h3>
+            {
+                sorted.length !== 0 ?
                     sorted.map(p =>
                         (<div key={p.id}>
                             <Post name={p.creator.username}
@@ -86,9 +46,8 @@ const Feed = ({allGroupsUrl, postsByGroup}) => {
                             >
                             </Post>
                         </div>))
-                    : <h3 className="feed_loading">Loading...</h3>
-                }
-            </div>
+                    : null
+            }
         </div>
     );
 };

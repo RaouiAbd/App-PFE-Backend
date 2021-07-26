@@ -19,7 +19,10 @@ const requests = {
     addCommentUrl: '/comment/',
     discussion : '/discussion/',
     projectsUrl : '/projects',
+    projectsByGroupUrl:'/projects/group/',
     tasksByProjectUrl : '/tasks/project/',
-    commentsByTaskIdUrl : '/comments/task/'
+    commentsByTaskIdUrl : '/comments/task/',
+    addCommentToTask : '/commentWithoutFile/task/',
+    addCommentWithFileToTask : '/commentWithFile/task/'
 }
 export default requests;
