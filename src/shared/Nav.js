@@ -16,6 +16,7 @@ import HeaderOption from "../shared/HeaderOption";
 import {MyGroups} from "../group/MyGroups";
 import GroupIcon from '@material-ui/icons/Group';
 import WorkIcon from '@material-ui/icons/Work';
+import {deleteGroup} from "../context/groupSlice";
 
 function Nav() {
 
@@ -58,6 +59,7 @@ function Nav() {
         setLinks(!links);
     }
     const logoutUser = () => {
+        dispatch(deleteGroup());
         dispatch(logout());
         setLinks(!links);
     }
@@ -86,10 +88,12 @@ function Nav() {
                         }}
                     >
                         {showGroups ?
-                            <><HeaderOption Icon={EventIcon} title="MyGroups"/>
-                            <div className="myGroups">
-                                <MyGroups allGroupsUrl={requests.allGroupsUrl}/>
-                            </div></>
+                            <>
+                                <HeaderOption Icon={GroupIcon} title="MyGroups"/>
+                                <div className="myGroups">
+                                    <MyGroups allGroupsUrl={requests.allGroupsUrl}/>
+                                </div>
+                            </>
                             : <HeaderOption Icon={GroupIcon} title="MyGroups"/>
                         }
                     </li>

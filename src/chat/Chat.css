@@ -66,25 +66,25 @@
 }
 .chatBody_message{
     position: relative;
-    background-color: white;
+    background-color: whitesmoke;
     padding: 5px 10px;
     border-radius: 5px;
     width: fit-content;
     max-width: 300px;
     overflow-wrap: break-word;
     margin: 0 10px 30px;
-    box-shadow: -2px -1px lightgrey;
+    box-shadow: -1px -1px 5px lightgrey, 1px 1px 5px lightgrey;
 }
 .chatBody_receiver{
     margin-left: auto;
-    background-color: white;
+    background-color: whitesmoke;
 }
 
 .message_info{
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 600;
     position: absolute;
-    top: -17px;
+    top: -20px;
 }
 .message_text{
     margin: 10px 0;

@@ -8,6 +8,16 @@ import Avatar from "@material-ui/core/Avatar";
 const GroupUsers=({groupUsersUrl, id}) =>{
     const [notify, setNotify] = useState({isOpen:false, message:'', type:''});
     const [users, setUsers] = useState([]);
+    const [group, setGroup] = useState(null);
+
+    useEffect(() => {
+        async function getGroup() {
+            let res = await axios.get('/group/' + id);
+            let data = res.data;
+            setGroup(data);
+        }
+        getGroup();
+    },['/group/' + id, group]);
 
     useEffect(() => {
         async function getUsers() {
@@ -18,6 +28,7 @@ const GroupUsers=({groupUsersUrl, id}) =>{
         }
         getUsers();
     },[groupUsersUrl, users]);
+
 
 
     return(
@@ -32,7 +43,27 @@ const GroupUsers=({groupUsersUrl, id}) =>{
                          }}
                     >
                         <Avatar>{u.username[0].toUpperCase()}</Avatar>
-                        <h4 style={{alignSelf:'center', marginLeft:'10px'}}>{u.username}</h4>
+                        <h4 style={{
+                            alignSelf:'center',
+                            marginLeft:'10px',
+                            flex:'1'
+                            }}
+                        >
+                            {u.username}
+                        </h4>
+                        {
+                            group &&
+                            (
+                                group.responsible &&
+                                    group.responsible.username === u.username ?
+                                        <span style={{alignSelf:'center'}}>
+                                        Responsible
+                                    </span> :
+                                        <span style={{alignSelf:'center'}}>
+                                        Member
+                                    </span>
+                            )
+                        }
                     </div>
                 ))
             }

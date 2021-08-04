@@ -19,8 +19,9 @@ export const Workspace = () => {
                 />
             </div>
             <div className="workspace_tasks">
-                {idProject === -1 ? <ComponentWhenNothingSelected name={"Project"}/>
+                {idProject === -1 ? <ComponentWhenNothingSelected name={"Project"} margin='30px'/>
                     : <Tasks tasksByProjectUrl={requests.tasksByProjectUrl}
+                             groupUsersUrl={requests.groupUsersUrl}
                              idProject={idProject}
                     />
                 }

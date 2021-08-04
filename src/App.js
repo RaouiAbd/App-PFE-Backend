@@ -45,7 +45,10 @@ function App() {
                                           {
                                               selectedGroup ?
                                                   <Feed postsByGroup={requests.postsByGroup}/> :
-                                                  <ComponentWhenNothingSelected name={"Group"}/>
+                                                  <ComponentWhenNothingSelected
+                                                      name={"Group"}
+                                                      margin='100px'
+                                                  />
                                           }
                                       </div>
                                       <Footer/>
@@ -58,7 +61,10 @@ function App() {
                                           {
                                               selectedGroup ?
                                                   <Workspace/> :
-                                                  <ComponentWhenNothingSelected name={"Workspace"}/>
+                                                  <ComponentWhenNothingSelected
+                                                      name={"Group"}
+                                                      margin='100px'
+                                                  />
                                           }
                                       </div>
                                       <Footer/>

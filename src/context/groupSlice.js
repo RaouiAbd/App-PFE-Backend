@@ -9,9 +9,12 @@ export const groupSlice = createSlice({
         theGroup: (state, action) => {
             state.group = action.payload;
         },
+        deleteGroup: (state) => {
+            state.group = null;
+        },
     },
 });
-export const {theGroup} = groupSlice.actions;
+export const {theGroup, deleteGroup} = groupSlice.actions;
 
 export const selectGroup = (state) => state.group.group;
 

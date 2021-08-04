@@ -1,9 +1,9 @@
 import React from "react";
 
-export const ComponentWhenNothingSelected = ({name}) => {
+export const ComponentWhenNothingSelected = ({name, margin}) => {
     return(
         <div style={{
-            marginTop:'30px',
+            marginTop: margin,
             display:'flex',
             flexDirection:'column',
             justifyContent:'center',
@@ -11,7 +11,7 @@ export const ComponentWhenNothingSelected = ({name}) => {
         }}
         >
             <label style={{
-                fontSize : '18px',
+                fontSize : '20px',
                 textAlign:'center',
                 marginBottom:'10px'
             }}

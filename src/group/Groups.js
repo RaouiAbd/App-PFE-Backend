@@ -17,6 +17,7 @@ import Group from "./Group";
 import GroupUsers from "./GroupUsers";
 import AddUserToGroup from "./AddUserToGroup";
 import DeleteUserFromGroup from "./DeleteUserFromGroup";
+import {SetGroupRespToUser} from "./SetGroupRespToUser";
 
 
 const useStyles = makeStyles(theme => ({
@@ -47,6 +48,7 @@ function Groups({allGroupsUrl, groupUrl, groupsUrl}){
     const [openPopupMembres, setOpenPopupMembres] = useState(false);
     const [openPopupAddMembre, setOpenPopupAddMembre] = useState(false);
     const [openPopupDeleteMembre, setOpenPopupDeleteMembre] = useState(false);
+    const [openPopupSetResp, setOpenPopupSetResp] = useState(false);
 
     useEffect(() => {
         async function getGroups() {
@@ -105,6 +107,16 @@ function Groups({allGroupsUrl, groupUrl, groupsUrl}){
                                     setOpenPopup={setOpenPopupAddMembre}
                     />
                 </Popup>
+                <Popup openPopup={openPopupSetResp}
+                       setOpenPopup={setOpenPopupSetResp}
+                       title={"Add Responsible"}
+                >
+                    <SetGroupRespToUser groupUserUrl={requests.groupUserUrl}
+                                        usersUrl={requests.usersUrl}
+                                        id={id}
+                                        setOpenPopup={setOpenPopupSetResp}
+                    />
+                </Popup>
                 <Popup openPopup={openPopupDeleteMembre}
                        setOpenPopup={setOpenPopupDeleteMembre}
                        title={"Delete a membre"}
@@ -134,11 +146,6 @@ function Groups({allGroupsUrl, groupUrl, groupsUrl}){
                                     <TableCell>{item.username}</TableCell>
                                     <TableCell>
                                         <Controls.Button
-                                            text="Delete"
-                                            variant="outlined"
-                                            onClick={()=> deleteGroup(item.id)}
-                                        />
-                                        <Controls.Button
                                             text="Membres"
                                             variant="outlined"
                                             onClick={()=> {
@@ -147,7 +154,7 @@ function Groups({allGroupsUrl, groupUrl, groupsUrl}){
                                             }}
                                         />
                                         <Controls.Button
-                                            text="Add a membre"
+                                            text="Add Membre"
                                             variant="outlined"
                                             onClick={()=> {
                                                 setId(item.id);
@@ -155,12 +162,25 @@ function Groups({allGroupsUrl, groupUrl, groupsUrl}){
                                             }}
                                         />
                                         <Controls.Button
-                                            text="Delete a membre"
+                                            text="Add Responsible"
+                                            variant="outlined"
+                                            onClick={()=> {
+                                                setId(item.id);
+                                                setOpenPopupSetResp(true);
+                                            }}
+                                        />
+                                        <Controls.Button
+                                            text="Delete Membre"
                                             variant="outlined"
                                             onClick={()=> {
                                                 setId(item.id);
                                                 setOpenPopupDeleteMembre(true);
                                             }}
+                                        />
+                                        <Controls.Button
+                                            text="Delete Group"
+                                            variant="outlined"
+                                            onClick={()=> deleteGroup(item.id)}
                                         />
                                     </TableCell>
                                 </TableRow>)

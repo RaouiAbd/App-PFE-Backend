@@ -26,36 +26,54 @@
 .closed{
     background-color: red;
 }
-
-.tasks > p{
+.newTask > p{
     display: flex;
     margin: 20px 20px 10px;
     font-size: 16px;
     cursor: pointer;
     color: gray;
 }
-.tasks > p:hover{
+.newTask > p:hover{
     color: black;
 }
-.newTask{
+.formTask{
+    width: 400px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 1px 1px 1px 1px lightgrey, -1px -1px 1px 1px lightgrey;
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
     border-radius: 5px;
     margin: 0 20px 50px;
 }
 .hidden{
     display: none;
 }
-.newTask > input{
-    flex : 1;
-    padding: 5px;
+.formTask > input{
+    outline: 0;
+    font-size: 16px;
+    color: grey;
+    padding: 15px;
     height: 40px;
+    margin-bottom: 5px;
     border: 1px solid lightgrey;
 }
-.newTask > button{
+.form__error{
+    font-size: 12px;
+    color: red;
+    margin-bottom: 10px;
+}
+.formTask > button{
+    outline: 0;
     border: none;
     color: white;
+    align-self: flex-start;
     font-size: 16px;
     background-color: black;
-    margin-left: 2px;
-    padding: 0 20px;
+    margin-top: 10px;
+    padding: 7px 15px;
+    text-align: center;
+    margin-left: 0;
 }

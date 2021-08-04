@@ -5,14 +5,17 @@ import './Projects.css';
 import Notification from "../shared/Notification";
 import {useSelector} from "react-redux";
 import {selectGroup} from "../context/groupSlice";
+import {selectUser} from "../context/userSlice";
 
 export const Projects = ({projectsUrl, projectsByGroupUrl,getIdProject}) => {
 
     const [projects, setProjects] = useState([]);
     const [projectName, setProjectName] = useState("");
     const [showForm, setShowForm] = useState(false);
+    const [projectNameError, setProjectNameError] = useState("");
     const [notify, setNotify] = useState({isOpen:false, message:'', type:''});
     const selectedGroup = useSelector(selectGroup);
+    const user = useSelector(selectUser);
 
     useEffect(() => {
         async function getProjects(){
@@ -22,18 +25,29 @@ export const Projects = ({projectsUrl, projectsByGroupUrl,getIdProject}) => {
         getProjects();
     }, [projectsByGroupUrl+selectedGroup.id, projects]);
 
+    function isValidate() {
+        let error="";
+        if(!projectName){
+            error = "This field shouldn't be blank";
+        }
+        if(error){
+            setProjectNameError(error);
+            return false;
+        }
+        return true;
+    }
+
     const addProject = async (e) => {
         e.preventDefault();
         try{
-            const project = {name:projectName, group:selectedGroup, tasks:null};
-            const result = await axios.post(projectsUrl, project);
-            setProjectName("");
-            setShowForm(!showForm);
-            setNotify({
-                isOpen: true,
-                message: "project added",
-                type: 'success'
-            });
+            const isValid = isValidate();
+            if(isValid){
+                const project = {name:projectName, group:selectedGroup, tasks:null};
+                const result = await axios.post(projectsUrl, project);
+                setProjectName("");
+                setShowForm(!showForm);
+                setProjectNameError("");
+            }
         }catch (e) {
             setNotify({
                 isOpen: true,
@@ -61,10 +75,14 @@ export const Projects = ({projectsUrl, projectsByGroupUrl,getIdProject}) => {
                     )) :
                     <div></div>
             }
-            <p onClick={() => setShowForm(!showForm)}>
-                <AddIcon/>
-                add a project
-            </p>
+            {
+                selectedGroup.responsible &&
+                    selectedGroup.responsible.username === user.username ?
+                    <p onClick={() => setShowForm(!showForm)}>
+                        <AddIcon/>
+                        add a project
+                    </p> : null
+            }
             <form className={showForm ?"newProject":"newProject hidden"}>
                 <input type="text"
                        placeholder="New project"
@@ -72,6 +90,9 @@ export const Projects = ({projectsUrl, projectsByGroupUrl,getIdProject}) => {
                        value={projectName}
                        name="name"
                 />
+                <div className="form__error">
+                    {projectNameError}
+                </div>
                 <button type="submit"
                         onClick={addProject}
                 >

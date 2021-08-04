@@ -3,6 +3,7 @@ import axios from "../shared/axios";
 import {useDispatch, useSelector} from "react-redux";
 import {selectUser} from "../context/userSlice";
 import {theGroup} from "../context/groupSlice";
+import './MyGroups.css';
 
 
 export const MyGroups = ({allGroupsUrl}) => {
@@ -29,14 +30,16 @@ export const MyGroups = ({allGroupsUrl}) => {
     },[allGroupsUrl]);
 
     return (
-        <div style={{backgroundColor:'white'}}>
+        <div className="groups">
             {
                 groups.length ?
                     groups.map(g => (
-                        <div style={{padding:'10px 5px'}}
+                        <div
+                            className="groups__item"
                              onClick={() => dispatch(theGroup({
                                  id: g.id,
                                  username: g.username,
+                                 responsible: g.responsible,
                                  posts:g.posts,
                                  users:g.users,
                              }))}
@@ -44,8 +47,8 @@ export const MyGroups = ({allGroupsUrl}) => {
                             {g.username}
                         </div>
                     )) :
-                    <div style={{padding:'5px'}}>
-                        Empty List
+                    <div className="groups__empty">
+                        No Groups
                     </div>
             }
         </div>

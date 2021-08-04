@@ -1,0 +1,35 @@
+.groups{
+    background-color: white;
+    box-shadow: -1px -1px lightgrey,
+        1px 1px lightgrey;
+    border-radius: 5px;
+    width: 150px;
+}
+.groups__item{
+    padding: 10px 20px;
+    color: grey;
+    border-bottom: 1px solid lightgrey;
+}
+.groups__item:last-child{
+    border-bottom: none;
+}
+.groups__item:hover{
+    background-color: whitesmoke;
+}
+.groups__empty{
+    padding: 15px;
+}
+@media screen and (max-width: 1200px) {
+    .groups{
+        margin-left: 20px;
+        box-shadow: 0 0;
+    }
+    .groups__item{
+        padding-top: 0;
+        border-bottom: none;
+    }
+    .groups__item:hover{
+        background-color: white;
+        color: black;
+    }
+}

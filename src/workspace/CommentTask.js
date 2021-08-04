@@ -124,6 +124,7 @@ export const CommentTask = ({getComments, idTask, addComment, addCommentWithFile
                                     <p className="message_timestamp">
                                         le : {m.dateOfMessage.slice(0, 10)} à {m.dateOfMessage.slice(11, 16)}
                                     </p>
+                                    <p></p>
                                 </div>
                             )): <div style={{marginBottom:"50px"}}>No message</div>
                     }
@@ -135,25 +136,36 @@ export const CommentTask = ({getComments, idTask, addComment, addCommentWithFile
                                value={message}
                                onChange={e=>setMessage(e.target.value)}
                         />
-                        <InputLabel style={{marginLeft:'5px'}}>
-                            <input style={{display:'none'}}
-                                   name="file"
-                                   multiple
-                                   onChange={onChange}
-                                   type="file" />
-                            <div className="inputOption_import">
+                        <InputLabel
+                            style={{
+                                marginLeft:'5px',
+                                alignSelf:'center'
+                            }}
+                        >
+                            <input
+                                style={{
+                                    display:'none'
+                                }}
+                                name="file"
+                                multiple
+                                onChange={onChange}
+                                type="file"
+                            />
+                            <div>
                                 <AttachFileIcon/>
                             </div>
                         </InputLabel>
-                        <button onClick={sendMessage}
-                                  style={{color:'white',
-                                      fontSize:'16px',
-                                      alignSelf:'center',
-                                      marginRight:'50px',
-                                      backgroundColor:'black',
-                                      border:'none',
-                                      padding:'10px'
-                                  }}
+                        <button
+                            onClick={sendMessage}
+                            style={{
+                                color:'white',
+                                fontSize:'16px',
+                                alignSelf:'center',
+                                marginRight:'50px',
+                                backgroundColor:'black',
+                                border:'none',
+                                padding:'10px'
+                            }}
                         >
                             Send
                         </button>
